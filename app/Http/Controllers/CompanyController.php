@@ -4,7 +4,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request;
-use App\Integrations\FinancialModelingPrep\FinancialModelingPrepApi;
 use App\Integrations\Provider;
 
 class CompanyController extends AbstractApi
@@ -19,7 +18,7 @@ class CompanyController extends AbstractApi
         $method = strtolower(array_shift($path));
         $provider = Provider::getAPIProvider();
 
-        if(!$provider){
+        if (!$provider || empty($path)) {
             return false;
         }
 
