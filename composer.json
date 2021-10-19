@@ -1,0 +1,25 @@
+{
+  "name": "sai/fmp-api-client",
+  "description": "Simple PHP FMP API Client",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "sai",
+      "email": "sai@connecttel.com.au"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "config/"
+    ],
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "ext-json": "*",
+    "ext-curl": "*"
+  }
+}
