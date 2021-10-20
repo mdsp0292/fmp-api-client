@@ -12,19 +12,29 @@ class FinancialModelingPrepApi implements FMPIInterface
     const API_KEY = '20afce5c7a2e0f38939917c463e18a30';
 
     /**
+     * @param string $companyKey
+     * @return false|string
      * @throws CustomException
      */
     public function getProfile(string $companyKey)
     {
-        return $this->request('profile', $companyKey);
+        $result = $this->request('profile', strtoupper($companyKey));
+        return empty($result)
+            ? json_response('This does not exist', 404)
+            : json_response('OK', 200, $result);
     }
 
     /**
+     * @param string $companyKey
+     * @return false|string
      * @throws CustomException
      */
     public function getQuote(string $companyKey)
     {
-        return $this->request('quote', $companyKey);
+        $result = $this->request('quote', strtoupper($companyKey));
+        return empty($result)
+            ? json_response('This does not exist', 404)
+            : json_response('OK', 200, $result);
     }
 
     /**

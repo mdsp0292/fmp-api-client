@@ -3,8 +3,8 @@
 require_once(dirname(__FILE__, 2) . '/config/init.php');
 
 use App\Exception\CustomException;
-use App\Interfaces\ApiInterface;
 use App\Http\Request;
+use App\Interfaces\ApiInterface;
 
 $request = new Request($_SERVER);
 
@@ -15,16 +15,15 @@ try {
     if ($reflectionClass->implementsInterface(ApiInterface::class)) {
         $apiClass = $reflectionClass->newInstance();
         $result = $apiClass->invoke($request->getMethodParams(), $request);
-        if (false !== $result && null !== $result) {
-            header('Content-Type: application/json');
-            echo json_encode($result, JSON_PRETTY_PRINT);
-            return true;
+
+        if(!$result){
+            throw new CustomException(404, null, "Resource not found");
         }
 
-        throw new CustomException(404, null, "Resource not found");
+        echo $result;
     }
 
 } catch (Exception $e) {
-    echo $e->getStatus() . ' ' . $e->getMessage();
+    echo json_response($e->getMessage(), $e->getStatus());
 }
 

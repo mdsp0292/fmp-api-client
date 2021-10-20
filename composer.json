@@ -10,6 +10,9 @@
     }
   ],
   "autoload": {
+    "files": [
+      "app/helpers.php"
+    ],
     "classmap": [
       "config/"
     ],

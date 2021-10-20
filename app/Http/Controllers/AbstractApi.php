@@ -6,7 +6,7 @@ use App\Exception\CustomException;
 use App\Interfaces\ApiInterface;
 use App\Http\Request;
 
-class AbstractApi implements ApiInterface
+abstract class AbstractApi implements ApiInterface
 {
     /**
      * @param array $path
@@ -20,20 +20,10 @@ class AbstractApi implements ApiInterface
             return $this->get($path, $request);
         }
 
-        throw new CustomException(405, "Method not allowed");
+        throw new CustomException(405, "Request method not allowed");
 
     }
 
-    /**
-     * @param array $path
-     * @param Request $request
-     * @return bool|string
-     */
-    protected function get(array $path, Request $request)
-    {
-        return true;
-    }
-
-
+    abstract public function get(array $path, Request $request);
 
 }
